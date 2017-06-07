@@ -1,0 +1,66 @@
+---
+title: "Personenübersicht"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+x <- read.table("dataset_test.csv", header=TRUE, sep=";")
+```
+
+## Infos zu den befragten Personen
+
+#Zuerst Infos zum Alter
+
+1. jüngster / ältester Befragter und Durchschnittsalter
+
+```{r age1}
+min(x$I_age)
+max(x$I_age)
+mean(x$I_age)
+```
+
+2. Plot mit Alter und Fragebogennr.:
+
+```{r age2}
+#library(stringr)
+#plot(str_replace_all(x$Frage..., fixed("Fragebogen "), ""),x$I_age,xlab="FragebogenNr.",ylab="Alter")
+plot(table(x$I_age),type = "o",ylab="Anzahl", xlab = "Alter")
+```
+
+
+#Herkunftsland der Befragten
+
+3. Wo Aufgewachsen?
+
+```{r country1}
+barplot(summary(x$I_country), main="Herkunftsland",
+   ylab="Anzahl", cex.names=0.9, las=2)
+```
+
+4. Tabelle dazu:
+
+```{r country2}
+table(levels(x$I_country),tabulate(x$I_country))
+```
+
+#Aktueller Wohnort
+
+5. Wo wohnen die Befragten derzeit?
+```{r country3}
+barplot(summary(x$I_living_place), main="Wohnort",
+   ylab="Anzahl", cex.names=0.9, las=2)
+```
+
+6. Tabelle
+
+```{r country4}
+table(levels(x$I_living_place),tabulate(x$I_living_place))
+```
+
+#Geschlechter verteilung
+
+7. Anteil Männer und Frauen
+```{r sex1}
+pie(table(x$I_sex),main = "Geschlecht", labels = c("M","W"), col=c("lightblue","yellow"))
+```
