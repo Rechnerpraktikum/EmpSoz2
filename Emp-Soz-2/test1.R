@@ -1,4 +1,4 @@
-x <- read.table("dataset_test.csv", header=TRUE, sep=";")
+x <- read.table("data/dataset.csv", header=TRUE, sep=";")
 
 # Antworten einer Frage umkehren (da negative Frage)
 cols = c("C7", "C14" , "F26")
