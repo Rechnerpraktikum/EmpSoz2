@@ -1,0 +1,28 @@
+---
+title: "R Notebook"
+output:
+  html_document: default
+---
+
+ANHANG (Nur für Gruppenmitglieder)  
+Hypothese 1: Je mehr Informationen aus Qualitätszeitungen bezogen werden, desto geringer ist die Anfälligkeit für Vorurteile gegenüber Migranten.  
+A = UV: Quelle von Informationen  
+B = AV: Anfälligkeit für Vorurteile gegenüber Migranten  
+  
+Hypothese 2: Je häufiger eine Person Gratiszeitungen liest, desto eher neigt sie zu fremdenfeindlichen Vorurteilen.  
+A = UV: Häufigkeit des Lesens von Gratiszeitungen  
+C = AV: Neigung zu fremdenfeindlichen Vorurteilen  
+  
+Hypothese 3: Je häufiger eine Person negative Schlagzeilen über Migranten liest, desto stärker neigt sie zu einer diskriminierenden Einstellung.  
+D = UV: Häufigkeit der negativ gelesenen Schlagzeilen  
+E = AV: diskriminierende Einstellung  
+  
+Hypothese 4: In den Medien wird unbewusst ein Ranking für Ausländer benutzt welches sich auf die Vorurteilsbildung der Leser auswirkt.  
+A = UV: Medienkonsum  
+F = AV: Auswirkung auf die Vorurteilbildung der Leser  
+  
+Hypothese 5: In TV Sendungen werden Verbrecher meist von ausländischen Personen gespielt was die Vorurteilbildung vor allem bei jungen Menschen stark beeinflusst.  
+G = UV: Zeit die mit Fernsehen verbracht wird  
+H = AV: Vorurteilsbildung bei jungen Menschen  
+  
+I = Soziodemographische Frage  
