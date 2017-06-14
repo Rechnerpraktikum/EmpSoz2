@@ -7,4 +7,4 @@ spalte2bis48 <- dataset[,2:48]
 
 # Antworten einer Frage umkehren (da negative Frage)
 cols = c("C7", "C14", "F26")
-dataset[ ,cols] = 5 - x[ ,cols]
+dataset[ ,cols] = 5 - dataset[ ,cols]
