@@ -1,5 +1,3 @@
-x <- read.table("data/dataset.csv", header=TRUE, sep=";") 
-attach(x) 
 
 ## fBattE -> alle fragen der Batterie E
 fBattE <- data.frame(E15,E16,E17,E18,E19,E20,E21,E22) 
