@@ -1,5 +1,5 @@
 ---
-title: "Personen?bersicht"
+title: "Personenübersicht"
 output: word_document
 ---
 
@@ -60,7 +60,7 @@ table(levels(x$I_living_place),tabulate(x$I_living_place))
 
 #Geschlechter verteilung
 
-7. Anteil M?nner und Frauen
+7. Anteil Männer und Frauen
 ```{r sex1}
 pie(table(x$I_sex),main = "Geschlecht", labels = c("M","W"), col=c("lightblue","yellow"))
 ```

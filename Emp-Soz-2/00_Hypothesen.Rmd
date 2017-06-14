@@ -8,7 +8,7 @@ https://www.rstudio.com/wp-content/uploads/2015/06/rmarkdown-german.pdf
 
 
 ANHANG (Nur für Gruppenmitglieder)  
-# **Hypothese 1**:
+### **Hypothese 1**:
 Je mehr Informationen aus Qualitätszeitungen bezogen werden, desto geringer ist die Anfälligkeit für Vorurteile gegenüber Migranten.  
 A = UV: Quelle von Informationen  
 B = AV: Anfälligkeit für Vorurteile gegenüber Migranten  
@@ -17,7 +17,7 @@ Hypothese 2: Je häufiger eine Person Gratiszeitungen liest, desto eher neigt si
 A = UV: Häufigkeit des Lesens von Gratiszeitungen  
 C = AV: Neigung zu fremdenfeindlichen Vorurteilen  
   
-# **Hypothese 3**:
+### **Hypothese 3**:
 Je häufiger eine Person negative Schlagzeilen über Migranten liest, desto stärker neigt sie zu einer diskriminierenden Einstellung.  
 D = UV: Häufigkeit der negativ gelesenen Schlagzeilen  
 E = AV: diskriminierende Einstellung  
