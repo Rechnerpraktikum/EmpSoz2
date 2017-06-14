@@ -1,18 +1,18 @@
 ---
-title: "Personenübersicht"
+title: "Personen?bersicht"
 output: word_document
 ---
 
 ```{r setup, include=FALSE}
 library(ggplot2)
-x <- read.table("dataset_test.csv", header=TRUE, sep=";")
+x <- read.table("data/dataset.csv", header=TRUE, sep=";")
 ```
 
 ## Infos zu den befragten Personen
 
 #Zuerst Infos zum Alter
 
-1. jüngster / ältester Befragter und Durchschnittsalter
+1. jÃ¼ngster / Ã¤ltester Befragter und Durchschnittsalter
 
 ```{r age1}
 min(x$I_age)
@@ -60,7 +60,7 @@ table(levels(x$I_living_place),tabulate(x$I_living_place))
 
 #Geschlechter verteilung
 
-7. Anteil Männer und Frauen
+7. Anteil M?nner und Frauen
 ```{r sex1}
 pie(table(x$I_sex),main = "Geschlecht", labels = c("M","W"), col=c("lightblue","yellow"))
 ```
