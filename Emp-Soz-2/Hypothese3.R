@@ -8,7 +8,9 @@ dfHyp3 <- data.frame(D0,fBattE_round)
 dimnames(dfHyp3) <- list(Frage, c("neg. Headline", "Mean E")) 
 dfHyp3 
 daten <- table(D0,fBattE_round) 
-dimnames(daten) <- list(c("täglich", "wöchentlich", "monatlich", "nie"), c("trifft zu","trifft eher zu", "trifft eher nicht zu", "trifft nicht zu")) 
+dimnames(daten) <- list(c("täglich", "wöchentlich", "monatlich", "nie"), 
+                        c("trifft zu","trifft eher zu", "trifft eher nicht zu", 
+                          "trifft nicht zu")) 
 daten 
 chisq.test(daten) 
 
