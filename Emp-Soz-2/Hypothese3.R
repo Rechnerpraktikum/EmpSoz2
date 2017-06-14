@@ -10,3 +10,4 @@ dimnames(daten) <- list(c("täglich", "wöchentlich", "monatlich", "nie"), c("tr
 daten 
 chisq.test(daten) 
 
+spineplot(t(daten))
