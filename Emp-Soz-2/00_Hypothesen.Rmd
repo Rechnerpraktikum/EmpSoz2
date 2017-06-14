@@ -5,6 +5,7 @@ output:
 ---
 
 https://www.rstudio.com/wp-content/uploads/2015/06/rmarkdown-german.pdf
+http://homepage.univie.ac.at/herbert.nagel/KategorialeDaten.pdf
 
 
 ANHANG (Nur für Gruppenmitglieder)  
