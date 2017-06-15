@@ -5,13 +5,10 @@ fBattE_round <- round(c(rowMeans(fBattE[,-1])))
 dfHyp3 <- data.frame(D0,fBattE_round) 
 dimnames(dfHyp3) <- list(Frage, c("neg. Headline", "Mean E")) 
 dfHyp3 
-daten <- table(D0,fBattE_round) 
-dimnames(daten) <- list(c("täglich", "wöchentlich", "monatlich", "nie"), c("trifft zu","trifft eher zu", "trifft eher nicht zu", "trifft nicht zu")) 
-daten 
-chisq.test(daten) 
+daten3 <- table(D0,fBattE_round) 
+dimnames(daten3) <- list(c("täglich", "wöchentlich", "monatlich", "nie"), c("trifft zu","trifft eher zu", "trifft eher nicht zu", "trifft nicht zu")) 
+daten3 
+chisq.test(daten3) 
 
-spineplot(t(daten))
+spineplot(t(daten3), ylab = "Häufigkeit negative Headline",xlab = "Fragebatterie E", col = rainbow(5))
 
-#corellation
-cor.test(D0, fBattE_round)
-plot(D0, fBattE_round)

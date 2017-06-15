@@ -20,4 +20,4 @@ dimnames(daten1) <- list(c("täglich", "wöchentlich", "monatlich", "nie"), c("t
 daten1 
 chisq.test(daten1) 
 
-spineplot(t(daten1), ylab = "häufigkeit",xlab = "Fragebatterie", col = rainbow(5))
+spineplot(t(daten1), ylab = "Häufigkeit Qualitätsmedien",xlab = "Fragebatterie B", col = rainbow(5))
