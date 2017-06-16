@@ -10,5 +10,7 @@ dimnames(daten3) <- list(c("täglich", "wöchentlich", "monatlich", "nie"), c("t
 daten3 
 chisq.test(daten3) 
 
+par(mar = c(10,10,4,2) + 0.1)
+par(cex.lab = 3, cex.axis = 1.8)
 spineplot(t(daten3), ylab = "Häufigkeit negative Headline",xlab = "Fragebatterie E", col = rainbow(5))
 
