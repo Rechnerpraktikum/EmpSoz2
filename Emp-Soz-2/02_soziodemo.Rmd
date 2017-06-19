@@ -55,12 +55,33 @@ barplot(summary(x$I_living_place), main="Wohnort",
 6. Tabelle
 
 ```{r country4}
-table(levels(x$I_living_place),tabulate(x$I_living_place))
+#table(levels(x$I_living_place),tabulate(x$I_living_place))
+par(mar = c(10,10,4,2) + 0.1)
+barplot(table(x$I_age),type = "o", cex.names =  2,cex.axis = 1.5,ylab="Häufigkeit", xlab = "Alter", col = "blue", cex.lab = 3)
 ```
 
 #Geschlechter verteilung
 
 7. Anteil Männer und Frauen
 ```{r sex1}
-pie(table(x$I_sex),main = "Geschlecht", labels = c("M","W"), col=c("lightblue","yellow"))
+#pie(table(x$I_sex),main = "Geschlecht", labels = c("M","W"), #col=c("lightblue","yellow"))
+
+lblsS <- c("Männlich","Weiblich")
+pctS <- round(table(x$I_sex)/sum(table(x$I_sex))*100)
+lblsS <- paste(lblsS, pctS) # add percents to labels
+lblsS <- paste(lblsS,"%",sep="") # ad % to labels
+pie(table(x$I_sex),labels = lblsS, cex=4,cex.main=4, col=c("blue","red"), main = "Geschlecht")
+```
+
+#Länder Verteilung
+
+8. Anteil Länder
+```{r land}
+land = c(80,13,7)
+
+lblsL <- c("Österreich","Deutschland", "Sonstige")
+pctL <- round(land/sum(land)*100)
+lblsL <- paste(lblsL, pctL) # add percents to labels
+lblsL <- paste(lblsL,"%",sep="") # ad % to labels
+pie(land,labels = lblsL, cex=3,cex.main=4, col=c("darkorange","blue", "yellow"), main = "Herkunftsland")
 ```
