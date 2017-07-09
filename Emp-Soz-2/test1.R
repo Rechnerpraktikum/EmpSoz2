@@ -5,7 +5,7 @@ cols = c("C7", "C14" , "F26")
 x[ ,cols] = 5 - x[ ,cols]
 
 # Relevante Werte PCA
-x1 <- x[,c(14:27,29:41, 43:48)]
+x1 <- x[,c(14:19)]
 x1
 
 
@@ -19,14 +19,14 @@ bart_spher(x1)
 
 VSS.scree(x1)
 
-pca.x1 <- principal(x1, nfactors = 6, rotate = "varimax")
+pca.x1 <- principal(x1, nfactors = 2, rotate = "varimax")
 pca.x1
 
 
-print(KMOS(x1), vars = 1:10, sort = TRUE)
+print(KMOS(x1), vars = 1:6, sort = TRUE)
 
 
-pca.x1 <- principal(x1, 6)
+pca.x1 <- principal(x1, 2)
 pca.x1$criteria <- NULL
 print(pca.x1, sort = TRUE, cut = 0.5, digits =2)
 
