@@ -1,0 +1,42 @@
+---
+title: "endbericht_tests"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+
+dataset <- read.table("data/dataset.csv", header=TRUE, sep=";")
+attach(dataset)
+
+# Auswahl von Spalte 2 bis 48 (-> nur die Likert Skalen)
+spalte2bis48 <- dataset[,2:48]
+
+
+# Antworten einer Frage umkehren (da negative Frage)
+cols = c("C7", "C14", "F26")
+
+dataset[ ,cols] = 5 - dataset[ ,cols]
+
+```
+
+## R Markdown
+
+This is an R Markdown document. 
+
+```{r }
+lblsS <- c("Männlich","Weiblich")
+pctS <- round(table(I_sex)/sum(table(I_sex))*100)
+lblsS <- paste(lblsS, pctS) # add percents to labels
+lblsS <- paste(lblsS,"%",sep="") # ad % to labels
+pie(table(I_sex),labels = lblsS, cex=1.5,cex.main=2, col=c("blue","red"), main = "Geschlecht")
+```
+
+## 
+
+```{r }
+
+```
+
+
