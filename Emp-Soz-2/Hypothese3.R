@@ -1,6 +1,6 @@
 
 ## fBattE -> alle fragen der Batterie E
-fBattE <- data.frame(E15,E16,E17,E18,E19,E20,E21,E22) 
+fBattE <- data.frame(E15Illegal,E16KeineLeistung,E17Faul,E18Krimineller,E19ArbeitWeg2,E20DeutschLernen,E21RueckOeBrauche,E22MeidenOe) 
 fBattE_round <- round(c(rowMeans(fBattE[,-1]))) 
 dfHyp3 <- data.frame(D0,fBattE_round) 
 dimnames(dfHyp3) <- list(Frage, c("neg. Headline", "Mean E")) 
