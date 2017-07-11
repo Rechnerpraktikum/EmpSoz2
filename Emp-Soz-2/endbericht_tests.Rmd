@@ -15,28 +15,75 @@ spalte2bis48 <- dataset[,2:48]
 
 
 # Antworten einer Frage umkehren (da negative Frage)
-cols = c("C7", "C14", "F26")
+cols = c("C7Unterstuetzen", "C14InterKulturen", "F26Nafri")
 
 dataset[ ,cols] = 5 - dataset[ ,cols]
 
 ```
 
-## R Markdown
 
-This is an R Markdown document. 
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+## Geschlecht
+
+Männer-Frauen Anteil der Befragten. 
 
 ```{r }
 lblsS <- c("Männlich","Weiblich")
 pctS <- round(table(I_sex)/sum(table(I_sex))*100)
 lblsS <- paste(lblsS, pctS) # add percents to labels
 lblsS <- paste(lblsS,"%",sep="") # ad % to labels
-pie(table(I_sex),labels = lblsS, cex=1.5,cex.main=2, col=c("blue","red"), main = "Geschlecht")
+pie(table(I_sex),labels = lblsS, cex=1,cex.main=1.5, col=c("blue","red"), main = "Verteilung Geschlecht Fragebogen")
 ```
 
-## 
-
+Statistik Männer Frauen an der WU 2015/2016
+Männer;11.558	Frauen: 10.284
 ```{r }
+statistikSex <- c(11558,10284)
+lblsS <- c("Männlich","Weiblich")
+pctS <- round(statistikSex/sum(statistikSex)*100)
+lblsS <- paste(lblsS, pctS) # add percents to labels
+lblsS <- paste(lblsS,"%",sep="") # ad % to labels
+pie(statistikSex,labels = lblsS, cex=1,cex.main=1.5, col=c("blue","red"), main = "Statistik WU Geschlecht")
+```
+Vergleich chi-square Geschelcht
+63Männer, 37Frauen in Strichprobe - Tatsächliche verteilung 53%-47%(M-W)
+```{r}
+chisq.test(x = c(63,37),p = c(0.53,0.47))
 
 ```
+< 0,05 das heist die Stichprobe ist nicht repräsentativ für die tatsächliche Verteilung aber knapp dran
+----------------------------------------------------------------------------------------------------------------------------------------------
 
+##Alter
 
+Analysen zum Alter der Befragten 
+
+Boxplot Alter:
+```{r}
+boxplot(I_age, main="Altersverteilung")
+```
+```{r}
+par(mar = c(4,4,4,4) + 0.1)
+barplot(table(factor(I_age, levels = 17:43)), main="Altersverteilung",cex.axis = 0.8 ,cex.names = 0.5)
+```
+Test auf Normalvertielung
+```{r}
+shapiro.test(table(I_age))
+```
+Alter ist nicht Normalverteilt (< 0,05)
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+##Herkunft
+
+```{r}
+barplot(summary(I_country), main="Herkunftsland",
+   ylab="Anzahl", cex.names=0.9, las=2)
+```
+Stichprobe:  80      = Österreich  20    = Ausland => 80/20
+Tatsächlich: 16.086  = Österreich  5.756 = Ausland => 73,65/26,35
+```{r}
+chisq.test(x = c(80,20),p = c(0.74,0.26))
+```
+Die Stichprobe nach Herkunft ist repräsentativ
+----------------------------------------------------------------------------------------------------------------------------------------------
