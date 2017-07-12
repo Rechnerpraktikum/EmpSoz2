@@ -89,6 +89,7 @@ Tatsächlich: 16.086  = Österreich  5.756 = Ausland => 73,65/26,35
 ```{r}
 chisq.test(x = c(80,20),p = c(0.74,0.26))
 ```
+
 Die Stichprobe nach Herkunft ist repräsentativ
 --------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -187,6 +188,9 @@ Kruskal-Wallis-Test
 ```{r}
 kruskal.test(blockB.scores$AnfVorMig ~ qualMedienRev$score2)
 ```
+
+H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen Qualitätsmedien und Anfälligkeit für Vorurteile.
+
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
 
