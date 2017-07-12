@@ -9,6 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(REdaS)
 library(rela)
 library(psych)
+library(ggplot2)
 
 dataset <- read.table("data/dataset.csv", header=TRUE, sep=";")
 attach(dataset)
@@ -98,11 +99,34 @@ Je mehr Informationen aus Qualitätszeitungen bezogen werden, desto geringer ist
 
 ##UV Quelle von Informationen
 
+Summenscore Qualitätszeitungen (1 Täglich, ..., 4 Nie - muss umgedreht werden für Summenscore)
+```{r}
+qualMedien <- data.frame(A4Standard,A5Presse,A6Kurier,A7WienerZ)
+qualMedienRev = 5 - qualMedien #umdrehen 1->4, 4->1
+qualMedienRev$score = qualMedienRev$A4Standard+qualMedienRev$A5Presse+qualMedienRev$A6Kurier+qualMedienRev$A7WienerZ
+qualMedienRev$score #summenscores
 
+```
 
-
+Summenscores umformen wie oft qualitäts Medien konsumiert werden (4-6 = 1 kaum, 7-9 = 2 regelmäßig, 10-16 = 3 oft)
 ```{r}
 
+
+for (i in 1:100) {
+  if (qualMedienRev$score[i] <= 6){
+    qualMedienRev$score2[i] <- 1
+  } else if (qualMedienRev$score[i] <= 9){
+    qualMedienRev$score2[i] <- 2
+  } else
+    qualMedienRev$score2[i] <- 3
+    
+}
+qualMedienRev$score2
+```
+Plot zu den neuen Gruppen:
+```{r}
+category <- c("kaum", "regelmäßig","oft")
+barplot(table(qualMedienRev$score2), names.arg = category , ylab = "Häufigkeit", main = "Konsum Qualitätsmedien")
 ```
 
 ##AV Anfälligkeit für Vorurteile gegenüber Migranten
@@ -130,14 +154,30 @@ Screeplot anzeigen für Anzahl der Komponenten => 1
 VSS.scree(blockB)
 ```
 
-
+PCA durchführen
 ```{r}
 pca.blockB <- principal(blockB, nfactors = 1)
 pca.blockB
 
-
 ```
 
+PCA Scores
+```{r}
+blockB.scores <- data.frame(pca.blockB$scores)
+names(blockB.scores) <- c("AnfVorMig")
+blockB.scores <- round((blockB.scores),4)
+blockB.scores
+```
+
+```{r}
+
+shapiro.test(blockB.scores$AnfVorMig)
+plot(blockB.scores$AnfVorMig)
+```
+
+```{r}
+densbox(blockB.scores$AnfVorMig ~ qualMedienRev$score2)
+```
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
 
