@@ -6,6 +6,9 @@ output: word_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
+library(REdaS)
+library(rela)
+library(psych)
 
 dataset <- read.table("data/dataset.csv", header=TRUE, sep=";")
 attach(dataset)
@@ -86,4 +89,57 @@ Tatsächlich: 16.086  = Österreich  5.756 = Ausland => 73,65/26,35
 chisq.test(x = c(80,20),p = c(0.74,0.26))
 ```
 Die Stichprobe nach Herkunft ist repräsentativ
-----------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+##Hypothese 1 - Variablenauswertung
+
+Je mehr Informationen aus Qualitätszeitungen bezogen werden, desto geringer ist die Anfälligkeit für Vorurteile gegenüber Migranten. 
+
+##UV Quelle von Informationen
+
+
+
+
+```{r}
+
+```
+
+##AV Anfälligkeit für Vorurteile gegenüber Migranten
+
+4 Stufige Likert-Skala (trifft sehr zu, trifft eher zu, trifft eher nicht zu, trifft gar nicht zu)
+
+Bartlett Test auf Sphärizität, sehr klein können weiter machen 
+```{r}
+
+blockB <- dataset[,c(14:19)]
+bart_spher(blockB)
+```
+
+Kaiser-Meyer-Olkin (KMO), alles > 0,8 sehr gut
+```{r}
+
+print(KMOS(blockB), sort = TRUE)
+``` 
+
+blockB erstellen (FragebatterieB)
+Screeplot anzeigen für Anzahl der Komponenten => 1
+
+```{r}
+
+VSS.scree(blockB)
+```
+
+
+```{r}
+pca.blockB <- principal(blockB, nfactors = 1)
+pca.blockB
+
+
+```
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+  
+
