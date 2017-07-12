@@ -166,17 +166,26 @@ PCA Scores
 blockB.scores <- data.frame(pca.blockB$scores)
 names(blockB.scores) <- c("AnfVorMig")
 blockB.scores <- round((blockB.scores),4)
-blockB.scores
+(head(blockB.scores))
 ```
 
+Shapirotest Normalverteilung und density Plot
 ```{r}
 
 shapiro.test(blockB.scores$AnfVorMig)
-plot(blockB.scores$AnfVorMig)
-```
 
+dH1 <- density(blockB.scores$AnfVorMig) # returns the density data
+plot(dH1, main = "FrageblockB - Dichteverteilung")
+```
+## Hypothese 1 - Auswertung
+
+Boxplot
 ```{r}
-densbox(blockB.scores$AnfVorMig ~ qualMedienRev$score2)
+boxplot(blockB.scores$AnfVorMig ~ qualMedienRev$score2)
+```
+Kruskal-Wallis-Test
+```{r}
+kruskal.test(blockB.scores$AnfVorMig ~ qualMedienRev$score2)
 ```
 ---------------------------------------------------------------------------------------------------------------------------------------------
 
