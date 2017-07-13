@@ -297,7 +297,16 @@ H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen Gratisz
 
 Je häufiger eine Person negative Schlagzeilen über Migranten liest, desto stärker neigt sie zu einer diskriminierenden Einstellung.
 
-##UV Häufigkeit der negativ gelesenen Schlagzeilen D
+##UV Häufigkeit der negativ gelesenen Schlagzeilen 
+
+```{r}
+negSchlagzeile <- dataset$D0AnzNeg
+
+negSchlagzeileRev = 5 - negSchlagzeile #umdrehen 1->4, 4->1
+
+category <- c("nie", "monatlich","wöchentlich","täglich")
+barplot(table(negSchlagzeileRev), names.arg = category , ylab = "Häufigkeit", main = "Negative Schlagzeilen")
+```
 
 ##AV diskriminierende Einstellung  
 
@@ -346,4 +355,19 @@ shapiro.test(blockE.scores$diskEinstellung)
 
 dH3 <- density(blockE.scores$diskEinstellung) # returns the density data
 plot(dH3, main = "FrageblockE - Dichteverteilung")
+```
+
+## Hypothese 3 - Auswertung
+
+Boxplot
+```{r}
+boxplot(blockE.scores$diskEinstellung ~ negSchlagzeileRev)
+```
+Kruskal-Wallis-Test
+```{r}
+kruskal.test(blockE.scores$diskEinstellung ~ negSchlagzeileRev)
+```
+H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen der Häufigkeit des lesens negativer Schlagzeilen und diskriminierender Einstellung. (aber knapp)
+
+--------------------------------------------------------------------------------------------------------------------------------------------
 
