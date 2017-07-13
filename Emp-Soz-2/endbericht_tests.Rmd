@@ -434,7 +434,7 @@ chisq.test(table(medienRev$score2))
 
 ```{r}
 blockF <- dataset[,c(37:41)]
-print(KMOS(blockH), sort = TRUE)
+print(KMOS(blockF), sort = TRUE)
 ```
 
 Variable F26Nafri aus der Fragebatterie auschliesen weil sie einen zu niedrigen Wert hat (< 0,5)
@@ -464,7 +464,7 @@ VSS.scree(blockF)
 
 PCA durchführen
 ```{r}
-pca.blockF <- principal(blockF, nfactors = 2)
+pca.blockF <- principal(blockF, nfactors = 1)
 pca.blockF
 
 ```
@@ -472,33 +472,24 @@ pca.blockF
 PCA Scores
 ```{r}
 blockF.scores <- data.frame(pca.blockF$scores)
-names(blockF.scores) <- c("AngstKriminal", "Kultur")
+names(blockF.scores) <- c("KulturAngst")
 blockF.scores <- round((blockF.scores),4)
 (head(blockF.scores))
 ```
 
-Wir haben jetzt 2 Komponenten (AngstKriminalität, Kultur) mit je 2 Variablen.
-Auswertungen für beide Komponenten müssen gemacht werden.
 
 
 
-Shapirotest Normalverteilung und density Plot für Komponente 1
+Shapirotest Normalverteilung und density Plot  
 ```{r}
 
-shapiro.test(blockF.scores$AngstKriminal)
+shapiro.test(blockF.scores$KulturAngst)
 
-dH41 <- density(blockF.scores$AngstKriminal) # returns the density data
+dH41 <- density(blockF.scores$KulturAngst) # returns the density data
 plot(dH41, main = "FrageblockF - Dichteverteilung")
 ```
 
-Shapirotest Normalverteilung und density Plot für Komponente 2
-```{r}
 
-shapiro.test(blockF.scores$Kultur)
-
-dH42 <- density(blockF.scores$Kultur) # returns the density data
-plot(dH42, main = "FrageblockF - Dichteverteilung")
-```
 
 ## Hypothese 4 - Auswertung
 
@@ -506,24 +497,15 @@ Hier müssen wieder beide Komponenten getestet werden.
 
 Boxplot Komponente 1
 ```{r}
-boxplot(blockF.scores$AngstKriminal ~ medienRev$score2)
-```
-Boxplot Komponente 2
-```{r}
-boxplot(blockF.scores$Kultur ~ medienRev$score2)
+boxplot(blockF.scores$KulturAngst ~ medienRev$score2)
 ```
 
-Kruskal-Wallis-Test Komponente 1
-```{r}
-kruskal.test(blockF.scores$AngstKriminal ~ medienRev$score2)
-```
-H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen Medienkonsum und der Vorurteilsbildung der Leser (Komponente1)
 
-Kruskal-Wallis-Test Komponente 2
+Kruskal-Wallis-Test 
 ```{r}
-kruskal.test(blockF.scores$Kultur ~ medienRev$score2)
+kruskal.test(blockF.scores$KulturAngst ~ medienRev$score2)
 ```
-H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen Medienkonsum und der Vorurteilsbildung der Leser (Komponente2)
+H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen Medienkonsum und der Vorurteilsbildung der Leser 
 
 
 
