@@ -130,6 +130,11 @@ category <- c("kaum", "regelmäßig","oft")
 barplot(table(qualMedienRev$score2), names.arg = category , ylab = "Häufigkeit", main = "Konsum Qualitätsmedien")
 ```
 
+Test auf Gleichverteilung
+```{r}
+chisq.test(table(qualMedienRev$score2))
+```
+
 ##AV Anfälligkeit für Vorurteile gegenüber Migranten
 
 4 Stufige Likert-Skala (trifft sehr zu, trifft eher zu, trifft eher nicht zu, trifft gar nicht zu)
@@ -208,7 +213,7 @@ gratisMedienRev$score #summenscores
 
 ```
 
-Summenscores umformen wie oft qualitäts Medien konsumiert werden (3-4 = 1 kaum, 5-7 = 2 regelmäßig, 8-12 = 3 oft)
+Summenscores umformen wie oft gratis Medien konsumiert werden (3-4 = 1 kaum, 5-7 = 2 regelmäßig, 8-12 = 3 oft)
 ```{r}
 
 
@@ -223,12 +228,17 @@ for (i in 1:100) {
 }
 gratisMedienRev$score2
 ```
+
 Plot zu den neuen Gruppen:
 ```{r}
 category <- c("kaum", "regelmäßig","oft")
 barplot(table(gratisMedienRev$score2), names.arg = category , ylab = "Häufigkeit", main = "Konsum Gratiszeitungen")
 ```
 
+Test auf Gleichverteilung
+```{r}
+chisq.test(table(gratisMedienRev$score2))
+```
 
 ##AV Neigung zu fremdenfeindlichen Vorurteilen
   
@@ -247,7 +257,7 @@ Kaiser-Meyer-Olkin (KMO), alles > 0,8 sehr gut
 print(KMOS(blockC), sort = TRUE)
 ``` 
 
-blockC erstellen (FragebatterieB)
+blockC erstellen (FragebatterieC)
 Screeplot anzeigen für Anzahl der Komponenten => 1
 
 ```{r}
@@ -308,6 +318,11 @@ category <- c("nie", "monatlich","wöchentlich","täglich")
 barplot(table(negSchlagzeileRev), names.arg = category , ylab = "Häufigkeit", main = "Negative Schlagzeilen")
 ```
 
+Gleichverteilung testen
+```{r}
+chisq.test(table(negSchlagzeileRev))
+```
+
 ##AV diskriminierende Einstellung  
 
 4 Stufige Likert-Skala (trifft sehr zu, trifft eher zu, trifft eher nicht zu, trifft gar nicht zu)
@@ -325,7 +340,7 @@ Kaiser-Meyer-Olkin (KMO), alles > 0,8 sehr gut
 print(KMOS(blockE), sort = TRUE)
 ``` 
 
-blockC erstellen (FragebatterieB)
+blockE erstellen (FragebatterieE)
 Screeplot anzeigen für Anzahl der Komponenten => 1
 
 ```{r}
@@ -371,3 +386,96 @@ H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen der Hä
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
+##Hypothese 4 - Variablenauswertung
+
+In den Medien wird unbewusst ein Ranking für Ausländer benutzt welches sich auf die Vorurteilsbildung der Leser auswirkt.
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+##Hypothese 5 - Variablenauswertung
+
+In TV Sendungen werden Verbrecher meist von ausländischen Personen gespielt was die Vorurteilbildung vor allem bei jungen Menschen stark beeinflusst.
+
+##UV Zeit die mit Fernsehen verbracht wird 
+
+```{r}
+tvZeit <- dataset$G0StundenTv
+
+category <- c("< 1 Std.", "1 - 2 Std.","3 - 5 Std.","> 5 Std.")
+barplot(table(tvZeit), names.arg = category , ylab = "Häufigkeit", main = "Tägliche TV Zeit")
+```
+
+Gleichverteilung testen
+```{r}
+chisq.test(table(tvZeit))
+```
+
+##AV Vorurteilsbildung beijungen Menschen
+
+4 Stufige Likert-Skala (trifft sehr zu, trifft eher zu, trifft eher nicht zu, trifft gar nicht zu)
+```{r}
+blockH <- dataset[,c(43:48)]
+print(KMOS(blockH), sort = TRUE)
+```
+
+Variable H31TVGanoven aus der Fragebatterie auschliesen weil sie einen zu niedrigen Wert hat
+```{r}
+blockH <- dataset[,c(43:45,47:48)]
+```
+
+Bartlett Test auf Sphärizität, sehr klein können weiter machen 
+```{r}
+bart_spher(blockH)
+```
+
+Kaiser-Meyer-Olkin (KMO), alles > 0,8 sehr gut
+```{r}
+
+print(KMOS(blockH), sort = TRUE)
+``` 
+
+blockH erstellen (FragebatterieH)
+Screeplot anzeigen für Anzahl der Komponenten => 2
+
+```{r}
+
+VSS.scree(blockH)
+```
+
+PCA durchführen
+```{r}
+pca.blockH <- principal(blockH, nfactors = 1)
+pca.blockH
+
+```
+
+PCA Scores
+```{r}
+blockH.scores <- data.frame(pca.blockH$scores)
+names(blockH.scores) <- c("VorbilJungMenschen")
+blockH.scores <- round((blockH.scores),4)
+(head(blockH.scores))
+```
+
+Shapirotest Normalverteilung und density Plot
+```{r}
+
+shapiro.test(blockH.scores$VorbilJungMenschen)
+
+dH5 <- density(blockH.scores$VorbilJungMenschen) # returns the density data
+plot(dH5, main = "FrageblockH - Dichteverteilung")
+```
+
+## Hypothese 5 - Auswertung
+
+Boxplot
+```{r}
+boxplot(blockH.scores$VorbilJungMenschen ~ tvZeit)
+```
+Kruskal-Wallis-Test
+```{r}
+kruskal.test(blockH.scores$VorbilJungMenschen ~ tvZeit)
+```
+H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen der TV Zeit pro Tag und der Vorurteilsbildung bei jungen Menschen
+--------------------------------------------------------------------------------------------------------------------------------------------
