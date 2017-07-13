@@ -191,8 +191,159 @@ kruskal.test(blockB.scores$AnfVorMig ~ qualMedienRev$score2)
 
 H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen Qualitätsmedien und Anfälligkeit für Vorurteile.
 
----------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+##Hypothese 2 - Variablenauswertung
+
+Je häufiger eine Person Gratiszeitungen liest, desto eher neigt sie zu fremdenfeindlichen Vorurteilen. 
+
+##UV Häufigkeit des Lesens von Gratiszeitungen
+
+Summenscore Qualitätszeitungen (1 Täglich, ..., 4 Nie - muss umgedreht werden für Summenscore)
+```{r}
+gratisMedien <- data.frame(A1Krone,A2Oesterreich,A3Heute)
+gratisMedienRev = 5 - gratisMedien #umdrehen 1->4, 4->1
+gratisMedienRev$score = gratisMedienRev$A1Krone+gratisMedienRev$A2Oesterreich+gratisMedienRev$A3Heute
+gratisMedienRev$score #summenscores
+
+```
+
+Summenscores umformen wie oft qualitäts Medien konsumiert werden (3-4 = 1 kaum, 5-7 = 2 regelmäßig, 8-12 = 3 oft)
+```{r}
 
 
+for (i in 1:100) {
+  if (gratisMedienRev$score[i] <= 4){
+    gratisMedienRev$score2[i] <- 1
+  } else if (gratisMedienRev$score[i] <= 7){
+    gratisMedienRev$score2[i] <- 2
+  } else
+    gratisMedienRev$score2[i] <- 3
+    
+}
+gratisMedienRev$score2
+```
+Plot zu den neuen Gruppen:
+```{r}
+category <- c("kaum", "regelmäßig","oft")
+barplot(table(gratisMedienRev$score2), names.arg = category , ylab = "Häufigkeit", main = "Konsum Gratiszeitungen")
+```
+
+
+##AV Neigung zu fremdenfeindlichen Vorurteilen
   
+4 Stufige Likert-Skala (trifft sehr zu, trifft eher zu, trifft eher nicht zu, trifft gar nicht zu)
+
+Bartlett Test auf Sphärizität, sehr klein können weiter machen 
+```{r}
+
+blockC <- dataset[,c(20:27)]
+bart_spher(blockC)
+```
+
+Kaiser-Meyer-Olkin (KMO), alles > 0,8 sehr gut
+```{r}
+
+print(KMOS(blockC), sort = TRUE)
+``` 
+
+blockC erstellen (FragebatterieB)
+Screeplot anzeigen für Anzahl der Komponenten => 1
+
+```{r}
+
+VSS.scree(blockC)
+```
+
+PCA durchführen
+```{r}
+pca.blockC <- principal(blockC, nfactors = 1)
+pca.blockC
+
+```
+
+PCA Scores
+```{r}
+blockC.scores <- data.frame(pca.blockC$scores)
+names(blockC.scores) <- c("NeigFremdVoru")
+blockC.scores <- round((blockC.scores),4)
+(head(blockC.scores))
+```
+
+Shapirotest Normalverteilung und density Plot
+```{r}
+
+shapiro.test(blockC.scores$NeigFremdVoru)
+
+dH2 <- density(blockC.scores$NeigFremdVoru) # returns the density data
+plot(dH2, main = "FrageblockC - Dichteverteilung")
+```
+
+## Hypothese 2 - Auswertung
+
+Boxplot
+```{r}
+boxplot(blockC.scores$NeigFremdVoru ~ gratisMedienRev$score2)
+```
+Kruskal-Wallis-Test
+```{r}
+kruskal.test(blockC.scores$NeigFremdVoru ~ gratisMedienRev$score2)
+```
+H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen Gratiszeitungen und der Neigung zu fremdenfreindlichen Vorurteilen.
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+##Hypothese 3 - Variablenauswertung
+
+Je häufiger eine Person negative Schlagzeilen über Migranten liest, desto stärker neigt sie zu einer diskriminierenden Einstellung.
+
+##UV Häufigkeit der negativ gelesenen Schlagzeilen D
+
+##AV diskriminierende Einstellung  
+
+4 Stufige Likert-Skala (trifft sehr zu, trifft eher zu, trifft eher nicht zu, trifft gar nicht zu)
+
+Bartlett Test auf Sphärizität, sehr klein können weiter machen 
+```{r}
+
+blockE <- dataset[,c(29:36)]
+bart_spher(blockE)
+```
+
+Kaiser-Meyer-Olkin (KMO), alles > 0,8 sehr gut
+```{r}
+
+print(KMOS(blockE), sort = TRUE)
+``` 
+
+blockC erstellen (FragebatterieB)
+Screeplot anzeigen für Anzahl der Komponenten => 1
+
+```{r}
+
+VSS.scree(blockE)
+```
+
+PCA durchführen
+```{r}
+pca.blockE <- principal(blockE, nfactors = 1)
+pca.blockE
+
+```
+
+PCA Scores
+```{r}
+blockE.scores <- data.frame(pca.blockE$scores)
+names(blockE.scores) <- c("diskEinstellung")
+blockE.scores <- round((blockE.scores),4)
+(head(blockE.scores))
+```
+
+Shapirotest Normalverteilung und density Plot
+```{r}
+
+shapiro.test(blockE.scores$diskEinstellung)
+
+dH3 <- density(blockE.scores$diskEinstellung) # returns the density data
+plot(dH3, main = "FrageblockE - Dichteverteilung")
 
