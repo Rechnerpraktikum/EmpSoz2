@@ -433,11 +433,11 @@ chisq.test(table(medienRev$score2))
 
 
 ```{r}
-blockH <- dataset[,c(37:41)]
+blockF <- dataset[,c(37:41)]
 print(KMOS(blockH), sort = TRUE)
 ```
 
-Variable F26Nafri aus der Fragebatterie auschliesen weil sie einen zu niedrigen Wert hat
+Variable F26Nafri aus der Fragebatterie auschliesen weil sie einen zu niedrigen Wert hat (< 0,5)
 ```{r}
 blockF <- dataset[,c(37:39,41)]
 ```
@@ -449,7 +449,7 @@ Bartlett Test auf Sphärizität, sehr klein können weiter machen
 bart_spher(blockF)
 ```
 
-Kaiser-Meyer-Olkin (KMO), alles > 0,8 sehr gut
+Kaiser-Meyer-Olkin (KMO), alles > 0,5 ist in ordnung
 ```{r}
 
 print(KMOS(blockF), sort = TRUE)
@@ -472,31 +472,58 @@ pca.blockF
 PCA Scores
 ```{r}
 blockF.scores <- data.frame(pca.blockF$scores)
-names(blockF.scores) <- c("AuswVoruLeser")
+names(blockF.scores) <- c("AngstKriminal", "Kultur")
 blockF.scores <- round((blockF.scores),4)
 (head(blockF.scores))
 ```
 
-Shapirotest Normalverteilung und density Plot
+Wir haben jetzt 2 Komponenten (AngstKriminalität, Kultur) mit je 2 Variablen.
+Auswertungen für beide Komponenten müssen gemacht werden.
+
+
+
+Shapirotest Normalverteilung und density Plot für Komponente 1
 ```{r}
 
-shapiro.test(blockF.scores$AuswVoruLeser)
+shapiro.test(blockF.scores$AngstKriminal)
 
-dH4 <- density(blockF.scores$AuswVoruLeser) # returns the density data
-plot(dH4, main = "FrageblockF - Dichteverteilung")
+dH41 <- density(blockF.scores$AngstKriminal) # returns the density data
+plot(dH41, main = "FrageblockF - Dichteverteilung")
+```
+
+Shapirotest Normalverteilung und density Plot für Komponente 2
+```{r}
+
+shapiro.test(blockF.scores$Kultur)
+
+dH42 <- density(blockF.scores$Kultur) # returns the density data
+plot(dH42, main = "FrageblockF - Dichteverteilung")
 ```
 
 ## Hypothese 4 - Auswertung
 
-Boxplot
+Hier müssen wieder beide Komponenten getestet werden.
+
+Boxplot Komponente 1
 ```{r}
-boxplot(blockF.scores$AuswVoruLeser ~ medienRev$score2)
+boxplot(blockF.scores$AngstKriminal ~ medienRev$score2)
 ```
-Kruskal-Wallis-Test
+Boxplot Komponente 2
 ```{r}
-kruskal.test(blockF.scores$AuswVoruLeser ~ medienRev$score2)
+boxplot(blockF.scores$Kultur ~ medienRev$score2)
 ```
-H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen Medienkonsum und der Vorurteilsbildung der Leser
+
+Kruskal-Wallis-Test Komponente 1
+```{r}
+kruskal.test(blockF.scores$AngstKriminal ~ medienRev$score2)
+```
+H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen Medienkonsum und der Vorurteilsbildung der Leser (Komponente1)
+
+Kruskal-Wallis-Test Komponente 2
+```{r}
+kruskal.test(blockF.scores$Kultur ~ medienRev$score2)
+```
+H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen Medienkonsum und der Vorurteilsbildung der Leser (Komponente2)
 
 
 
