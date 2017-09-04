@@ -37,7 +37,7 @@ lblsS <- c("Männlich","Weiblich")
 pctS <- round(table(I_sex)/sum(table(I_sex))*100)
 lblsS <- paste(lblsS, pctS) # add percents to labels
 lblsS <- paste(lblsS,"%",sep="") # ad % to labels
-pie(table(I_sex),labels = lblsS, cex=1,cex.main=1.5, col=c("blue","red"), main = "Verteilung Geschlecht Fragebogen")
+pie(table(I_sex),labels = lblsS, cex=1,cex.main=1.5, col=c("blue","red"), main = "Geschlecht Fragebogen")
 ```
 
 Statistik Männer Frauen an der WU 2015/2016
@@ -48,7 +48,7 @@ lblsS <- c("Männlich","Weiblich")
 pctS <- round(statistikSex/sum(statistikSex)*100)
 lblsS <- paste(lblsS, pctS) # add percents to labels
 lblsS <- paste(lblsS,"%",sep="") # ad % to labels
-pie(statistikSex,labels = lblsS, cex=1,cex.main=1.5, col=c("blue","red"), main = "Statistik WU Geschlecht")
+pie(statistikSex,labels = lblsS, cex=1,cex.main=1.5, col=c("blue","red"), main = "Geschlecht Statistik WU")
 ```
 Vergleich chi-square Geschelcht
 63Männer, 37Frauen in Strichprobe - Tatsächliche verteilung 53%-47%(M-W)
