@@ -71,6 +71,13 @@ boxplot(I_age, main="Altersverteilung")
 par(mar = c(4,4,4,4) + 0.1)
 barplot(table(factor(I_age, levels = 17:43)), main="Altersverteilung",cex.axis = 0.8 ,cex.names = 0.5)
 ```
+auswertungen
+```{r}
+min(I_age)
+max(I_age)
+mean(I_age)
+median(I_age)
+```
 Test auf Normalvertielung
 ```{r}
 shapiro.test(table(I_age))
@@ -87,7 +94,7 @@ barplot(summary(I_country), main="Herkunftsland",
 Stichprobe:  80      = Österreich  20    = Ausland => 80/20
 Tatsächlich: 16.086  = Österreich  5.756 = Ausland => 73,65/26,35
 ```{r}
-chisq.test(x = c(80,20),p = c(0.74,0.26))
+chisq.test(x = c(80,20),p = c(0.7365,0.2635))
 ```
 
 Die Stichprobe nach Herkunft ist repräsentativ
