@@ -327,7 +327,7 @@ barplot(table(negSchlagzeileRev), names.arg = category , ylab = "Häufigkeit", m
 
 Gleichverteilung testen
 ```{r}
-chisq.test(table(negSchlagzeileRev))
+shapiro.test(table(negSchlagzeileRev))
 ```
 
 ##AV diskriminierende Einstellung  
