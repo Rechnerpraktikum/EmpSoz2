@@ -376,7 +376,7 @@ Shapirotest Normalverteilung und density Plot
 shapiro.test(blockE.scores$diskEinstellung)
 
 dH3 <- density(blockE.scores$diskEinstellung) # returns the density data
-plot(dH3, main = "FrageblockE - Dichteverteilung")
+plot(dH3, main = "Dichteverteilung - Diskriminierende Einstellung")
 ```
 
 ## Hypothese 3 - Auswertung
