@@ -383,7 +383,7 @@ plot(dH3, main = "FrageblockE - Dichteverteilung")
 
 Boxplot
 ```{r}
-boxplot(blockE.scores$diskEinstellung ~ negSchlagzeileRev)
+boxplot(blockE.scores$diskEinstellung ~ negSchlagzeileRev, ylab="Diskriminierende Einstellung", xlab ="Häufigkeit neg. Schlagzeilen", names=category)
 ```
 Kruskal-Wallis-Test
 ```{r}
@@ -425,13 +425,13 @@ medienRev$score2
 ```
 Plot zu den neuen Gruppen:
 ```{r}
-category <- c("wenige", "mittel","viele")
+category <- c("wenige", "mehrere","viele")
 barplot(table(medienRev$score2), names.arg = category , ylab = "Häufigkeit", main = "Konsum unterschiedliche Medien")
 ```
 
 Test auf Gleichverteilung
 ```{r}
-chisq.test(table(medienRev$score2))
+shapiro.test(table(medienRev$score2))
 ```
 
 ##AV Auswirkung auf die Vorurteilsbildung der Leser  
