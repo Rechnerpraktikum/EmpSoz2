@@ -479,7 +479,7 @@ pca.blockF
 PCA Scores
 ```{r}
 blockF.scores <- data.frame(pca.blockF$scores)
-names(blockF.scores) <- c("KulturAngst")
+names(blockF.scores) <- c("Vorurteilsbildung")
 blockF.scores <- round((blockF.scores),4)
 (head(blockF.scores))
 ```
@@ -490,10 +490,10 @@ blockF.scores <- round((blockF.scores),4)
 Shapirotest Normalverteilung und density Plot  
 ```{r}
 
-shapiro.test(blockF.scores$KulturAngst)
+shapiro.test(blockF.scores$Vorurteilsbildung)
 
-dH41 <- density(blockF.scores$KulturAngst) # returns the density data
-plot(dH41, main = "FrageblockF - Dichteverteilung")
+dH41 <- density(blockF.scores$Vorurteilsbildung) # returns the density data
+plot(dH41, main = "Dichteverteilung - Vorurteilsbildung der Leser")
 ```
 
 
@@ -504,13 +504,13 @@ Hier müssen wieder beide Komponenten getestet werden.
 
 Boxplot Komponente 1
 ```{r}
-boxplot(blockF.scores$KulturAngst ~ medienRev$score2)
+boxplot(blockF.scores$Vorurteilsbildung ~ medienRev$score2, ylab="Vorurteilsbildung der Leser_innen", xlab ="Konsum unterschiedliche Medien", names=category)
 ```
 
 
 Kruskal-Wallis-Test 
 ```{r}
-kruskal.test(blockF.scores$KulturAngst ~ medienRev$score2)
+kruskal.test(blockF.scores$Vorurteilsbildung ~ medienRev$score2)
 ```
 H0 wird beibehalten, es besteht kein signifikanter Zusammenhang zwischen Medienkonsum und der Vorurteilsbildung der Leser 
 
